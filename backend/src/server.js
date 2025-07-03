@@ -13,10 +13,6 @@ import { arcjetMiddleware } from './middleware/arcjet.middleware.js';
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!!');
-});
-
 app.use(cors());
 app.use(express.json());
 
@@ -29,6 +25,12 @@ app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/notifications', notificationRoutes);
+
+// error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(500).json({ error: err.message || 'Internal server error' });
+});
 
 const startServer = async () => {
   try {

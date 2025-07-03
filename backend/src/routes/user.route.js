@@ -12,9 +12,9 @@ const router = express.Router();
 
 router.get('/profile/:username', getUserProfile);
 
-router.put('/sync', protectRoute, syncUser);
-router.put('/me', protectRoute, getCurrentUser);
+router.post('/sync', protectRoute, syncUser);
+router.get('/me', protectRoute, getCurrentUser);
 router.put('/profile/:username', protectRoute, updateProfile);
-router.put('/follow/:targetUserId', protectRoute, followUser);
+router.post('/follow/:targetUserId', protectRoute, followUser);
 
 export default router;
